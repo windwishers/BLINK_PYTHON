@@ -3,6 +3,7 @@ from tkinter import *
 import DataCenter
 import UTIL
 from Control import Loader
+from Display.Decorator import *
 from Display.WalkScreen import WalkScreen
 
 
@@ -14,15 +15,14 @@ class MainScreen:
         self.root = Tk()
         self.root.protocol('WM_DELETE_WINDOW', self.on_close)
         self.root.wm_title("BLINK!!! v" + DataCenter.version)
+
         # Widget Configuration
-        self.title = Label(self.root, text="BLINK !!! ", width=20)
-        UTIL.decorate_and_pack(UTIL.DECO_MAIN_WIDGET, self.title)
-        self.notification = Label(self.root, text="", width=20)
-        UTIL.decorate_and_pack(UTIL.DECO_MAIN_WIDGET, self.notification)
-        self.walk = Button(self.root, text="WALK", command=self.run_walk, state=DISABLED)
-        UTIL.decorate_and_pack(UTIL.DECO_MAIN_WIDGET, self.walk)
-        self.exit = Button(self.root, text="EXIT", command=self.on_exit, state=DISABLED)
-        UTIL.decorate_and_pack(UTIL.DECO_MAIN_WIDGET, self.exit)
+        DECO.set_key(MAIN_WIDGET)
+        self.title = DECO.decorate(Label(self.root, text="BLINK !!! ", width=20))
+        self.notification = DECO.decorate(Label(self.root, text="", width=20))
+        self.walk = DECO.decorate(Button(self.root, text="WALK", command=self.run_walk, state=DISABLED))
+        self.exit = DECO.decorate(Button(self.root, text="EXIT", command=self.on_exit, state=DISABLED))
+
         UTIL.set_window_center(self.root)
         self.root.resizable(width=False, height=False)
 
