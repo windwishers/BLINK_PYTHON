@@ -28,7 +28,8 @@ def load_files(file_path):
 # load wordlist_800.csv.
 def load():
     global __word_list
-    __word_list = load_files('wordlist_800.csv')
+    # __word_list = load_files('wordlist_800.csv')
+    __word_list = load_files('eggs.csv')
 
 
 # get list on predicate is true. predicate is bool lambda
