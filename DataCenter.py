@@ -1,48 +1,37 @@
+import copy
+import sys
+from functools import reduce
+
+from Control import WordBuilder
 from model.Word import *
+import csv
+
+# word list.
+__word_list = []
 
 
-# noinspection PyAttributeOutsideInit
-class DataCenter(object):
-    __instance = None
+# load one csv file.
+def load_files(file_path):
+    word_list = []
+    with open(file_path, 'r', newline='', encoding='utf-8') as f:
+        for lines in f:
+            line = lines.rstrip()
+            list = WordBuilder.build(line)
+            word_list = word_list + list
 
-    def __new__(cls, val):
-        if DataCenter.__instance is None:
-            DataCenter.__instance = object.__new__(cls)
-        DataCenter.__instance = val
-        DataCenter.__instance.init()
-        return DataCenter.__instance
-
-    def init(self):
-        self.__word_list = []
-        pass
-
-    def load(self):
-        self.__word_list.append(Word("WORD1", "MEAN1"))
-        pass
+    return word_list
 
 
-class UTIL:
+# load wordlist_800.csv.
+def load():
+    global __word_list
+    __word_list = load_files('wordlist_800.csv')
 
-    @staticmethod
-    def set_window_center(toplevel):
-        toplevel.update_idletasks()
-        w = toplevel.winfo_screenwidth()
-        h = toplevel.winfo_screenheight()
-        size = tuple(int(_) for _ in toplevel.geometry().split('+')[0].split('x'))
-        x = w / 2 - size[0] / 2
-        y = h / 2 - size[1] / 2
-        # toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
-        toplevel.geometry("+%d+%d" % (x, y))
 
-    DECO_MAIN_WIDGET = "DECO_MAIN_WIDGET"
-    DECO_WALK_WIDGET = "DECO_MAIN_WIDGET"
+# get list on predicate is true. predicate is bool lambda
+def get_list(predicate: object = (lambda x: True)) -> bool:
+    return copy.deepcopy(list(filter(predicate, __word_list)))
 
-    @staticmethod
-    def decorate_and_pack(style, widget):
-        if style == UTIL.DECO_MAIN_WIDGET:
-            widget.configure(background='black', fg='white')
-            widget.pack(fil="x")
-        elif style == UTIL.DECO_WALK_WIDGET:
-            widget.configure(background='black', fg='white')
-            widget.pack(fil="x")
 
+if __name__ == '__main__':
+    load()

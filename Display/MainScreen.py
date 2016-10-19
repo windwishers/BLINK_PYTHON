@@ -1,5 +1,6 @@
 from tkinter import *
 import Blink
+import UTIL
 from Display.WalkScreen import WalkScreen
 from DataCenter import *
 

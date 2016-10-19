@@ -1,6 +1,6 @@
 from tkinter import *
 
-from DataCenter import DataCenter, UTIL
+import DataCenter
 
 
 class WalkScreen:
@@ -16,7 +16,7 @@ class WalkScreen:
 
         # 첫화면 설정.
         self.init.pack(fill="x")
-        UTIL.decorate_and_pack(UTIL.DECO_WALK_WIDGET, Label(self.init, text="please enter ..."))
+        DataCenter.UTIL.decorate_and_pack(UTIL.DECO_WALK_WIDGET, Label(self.init, text="please enter ..."))
         UTIL.decorate_and_pack(UTIL.DECO_WALK_WIDGET, Button(self.init, text="START", command=self.show_test))
 
         # 테스트화면 설정
