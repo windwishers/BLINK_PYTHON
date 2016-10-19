@@ -8,10 +8,13 @@ import csv
 
 # word list.
 __word_list = []
+# version
+version = "0.0.1"
 
 
 # load one csv file.
 def load_files(file_path):
+
     word_list = []
     with open(file_path, 'r', newline='', encoding='utf-8') as f:
         for lines in f:

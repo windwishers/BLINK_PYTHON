@@ -1,8 +1,8 @@
 from tkinter import *
-import Blink
+
+import DataCenter
 import UTIL
 from Display.WalkScreen import WalkScreen
-from DataCenter import *
 
 
 class MainScreen:
@@ -10,7 +10,7 @@ class MainScreen:
     def __init__(self):
         # Root Configuration
         self.root = Tk()
-        self.root.wm_title("BLINK!!! v" + Blink.BLINK.version)
+        self.root.wm_title("BLINK!!! v" + DataCenter.version)
         # Widget Configuration
         self.title = Label(self.root, text="BLINK !!! ", width=15)
         UTIL.decorate_and_pack(UTIL.DECO_MAIN_WIDGET, self.title)

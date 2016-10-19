@@ -1,14 +1,12 @@
-import Display.MainScreen
-import DataCenter
-
-from tkinter import *
+from Display.MainScreen import MainScreen
 
 
 class BLINK:
-    version = "0.0.1"
+    pass
 
 if __name__ == '__main__':
-    DataCenter.__load()
+    main = MainScreen()
+    main.show()
 
     None
 
