@@ -1,5 +1,5 @@
 from tkinter import *
-
+from Display.Decorator import *
 import DataCenter
 import UTIL
 
@@ -10,27 +10,27 @@ class WalkScreen:
         self.top = Toplevel(parent)
         self.top.grab_set()  # make modal
 
-
         # 화면 생성.
         self.init = Frame(self.top)
         self.test = Frame(self.top)
 
         # 첫화면 설정.
         self.init.pack(fill="x")
-        UTIL.decorate_and_pack(UTIL.DECO_WALK_WIDGET, Label(self.init, text="please enter ..."))
-        UTIL.decorate_and_pack(UTIL.DECO_WALK_WIDGET, Button(self.init, text="START", command=self.show_test))
+        DECO.set_key(WALK_WIDGET)
+        DECO.decorate(Label(self.init, text="please enter ...")).pack()
+        DECO.decorate(Button(self.init, text="START", command=self.show_test)).pack()
 
         # 테스트화면 설정
-        UTIL.decorate_and_pack(UTIL.DECO_WALK_WIDGET, Label(self.test, text="주어진 텍스트를 입력 하시오."))
-        UTIL.decorate_and_pack(UTIL.DECO_WALK_WIDGET, Label(self.test, text="WORD : MEAN // COMMENT "))
-        UTIL.decorate_and_pack(UTIL.DECO_WALK_WIDGET, Label(self.test, text="repeat : TEXT"))
-        self.input = Entry(self.test)
+        DECO.decorate(Label(self.test, text="주어진 텍스트를 입력 하시오."))
+
+        DECO.decorate(Label(self.test, text="WORD : MEAN // COMMENT "))
+        DECO.decorate(Label(self.test, text="repeat : TEXT"))
+        self.input = DECO.decorate(Entry(self.test))
         self.input.bind("<Return>", self.process_input)
-        UTIL.decorate_and_pack(UTIL.DECO_WALK_WIDGET,self.input)
-        self.close = Button(self.top, text="CLOSE", command=self.ok)
+        self.close = DECO.decorate(Button(self.top, text="CLOSE", command=self.ok))
         UTIL.set_window_center(self.top)
 
-        #값 설정
+        # 값 설정
 
     # close screen
     def ok(self):
