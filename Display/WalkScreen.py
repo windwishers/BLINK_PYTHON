@@ -17,8 +17,12 @@ class WalkScreen:
         # 첫화면 설정.
         self.init.pack(fill="x")
         DECO.set_key(WALK_WIDGET)
-        DECO.decorate(Label(self.init, text="please enter ...")).pack()
-        DECO.decorate(Button(self.init, text="START", command=self.show_test)).pack()
+
+        DECO.decorate(Label(self.init, text="please Test Count Max " + str(DataCenter.size()) + " ..."))
+        self.count = DECO.decorate(Entry(self.init, ))
+        UTIL.limit_number(self.count)
+        UTIL.set_text(self.count, str(DataCenter.size()))
+        DECO.decorate(Button(self.init, text="START", command=self.show_test))
 
         # 테스트화면 설정
         DECO.decorate(Label(self.test, text="주어진 텍스트를 입력 하시오."))
@@ -38,10 +42,12 @@ class WalkScreen:
 
     # show test screen
     def show_test(self):
+        test_count = int(self.count.get())
+        print(test_count)
         self.close.pack_forget()
         self.init.pack_forget()
         self.test.pack()
-        UTIL.decorate_and_pack(UTIL.DECO_WALK_WIDGET, self.close)
+        DECO.decorate(self.close, WALK_WIDGET)
         self.input.focus_set()
 
     # show walk screen

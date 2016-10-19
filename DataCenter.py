@@ -51,3 +51,7 @@ if __name__ == '__main__':
     list = get_ran_list(length=10)
     print(list)
     print(list.__len__())
+
+
+def size():
+    return __word_list.__len__()

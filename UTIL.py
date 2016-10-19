@@ -1,4 +1,4 @@
-from tkinter import Entry, Label
+from tkinter import Entry, Label, StringVar
 
 
 def set_window_center(toplevel):
@@ -10,19 +10,6 @@ def set_window_center(toplevel):
     y = h / 2 - size[1] / 2
     # toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
     toplevel.geometry("+%d+%d" % (x, y))
-
-
-DECO_MAIN_WIDGET = "DECO_MAIN_WIDGET"
-DECO_WALK_WIDGET = "DECO_MAIN_WIDGET"
-
-
-def decorate_and_pack(style, widget):
-    if style == DECO_MAIN_WIDGET:
-        widget.configure(background='black', fg='white')
-        widget.pack(fil="x")
-    elif style == DECO_WALK_WIDGET:
-        widget.configure(background='black', fg='white')
-        widget.pack(fil="x")
 
 
 # entry text clear.
@@ -38,3 +25,24 @@ def set_text(target, text):
         target.insert(0, text)
     elif isinstance(target, Label):
         target.config(text=text)
+
+
+# internal use. sv callback.
+def callback(sv):
+    string = sv.get();
+    if string.isdigit():
+        sv.set(string)
+        return
+    re = ""
+    for c in string:
+        if c.isdigit():
+            re += c
+    sv.set(re)
+
+
+# entry limit number.
+def limit_number(entry):
+    if isinstance(entry, Entry):
+        sv = StringVar()
+        sv.trace("w", lambda name, index, mode, sv=sv: callback(sv))
+        entry.configure(textvariable=sv)
