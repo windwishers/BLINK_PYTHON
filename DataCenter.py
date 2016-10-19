@@ -10,7 +10,7 @@ import csv
 # word list.
 __word_list = []
 # version
-version = "0.0.1"
+version = "0.1.0"
 
 
 # load one csv file.
