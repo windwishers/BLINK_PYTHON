@@ -1,3 +1,6 @@
+from tkinter import Entry, Label
+
+
 def set_window_center(toplevel):
     toplevel.update_idletasks()
     w = toplevel.winfo_screenwidth()
@@ -20,3 +23,18 @@ def decorate_and_pack(style, widget):
     elif style == DECO_WALK_WIDGET:
         widget.configure(background='black', fg='white')
         widget.pack(fil="x")
+
+
+# entry text clear.
+def clear_entry(entry):
+    from tkinter import END
+    entry.delete(0, END)
+
+
+# entry clear and insert in 0.
+def set_text(target, text):
+    if isinstance(target, Entry):
+        clear_entry(target)
+        target.insert(0, text)
+    elif isinstance(target, Label):
+        target.config(text=text)

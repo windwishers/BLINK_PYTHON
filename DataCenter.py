@@ -1,4 +1,5 @@
 import copy
+import random
 import sys
 from functools import reduce
 
@@ -14,7 +15,6 @@ version = "0.0.1"
 
 # load one csv file.
 def load_files(file_path):
-
     word_list = []
     with open(file_path, 'r', newline='', encoding='utf-8') as f:
         for lines in f:
@@ -36,5 +36,18 @@ def get_list(predicate: object = (lambda x: True)) -> bool:
     return copy.deepcopy(list(filter(predicate, __word_list)))
 
 
+# get list on predicate is true. predicate is bool lambda
+def get_ran_list(predicate: object = (lambda x: True), length=0):
+    fil_list = list(filter(predicate, __word_list))
+    if length == 0 or length >  fil_list.__len__():
+        length = fil_list.__len__()
+    random_list = random.sample(fil_list, length)
+    return copy.deepcopy(random_list)
+
+
 if __name__ == '__main__':
     load()
+    print(get_ran_list().__len__())
+    list = get_ran_list(length=10)
+    print(list)
+    print(list.__len__())
